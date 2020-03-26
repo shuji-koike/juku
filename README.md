@@ -9,3 +9,11 @@ git update-index --no-skip-worktree src/sandbox.ts
 # `skip-worktree`されているファイルの一覧を確認
 git ls-files -v | grep '^s'
 ```
+
+### reference
+
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+- https://github.com/shuji-koike/juku/wiki/javascript
+- https://github.com/shuji-koike/juku/wiki/scala
