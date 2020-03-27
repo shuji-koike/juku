@@ -1,5 +1,11 @@
 # juku
 
+- wiki (work in progress...)
+  - [javascript](https://github.com/shuji-koike/juku/wiki/javascript)
+  - [scala](https://github.com/shuji-koike/juku/wiki/scala)
+
+# setup
+
 ```sh
 # `skip-worktree`で`sandbox.js`をgitの差分の追跡から除外する
 git update-index --skip-worktree src/sandbox.ts
