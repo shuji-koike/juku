@@ -2,7 +2,8 @@
   "name": "juku",
   "private": true,
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "lint": "npx prettier --write ."
   },
   "dependencies": {
     "react": "^16.13.1",
