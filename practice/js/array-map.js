@@ -5,18 +5,18 @@ console.log([1, 2, 3]);
 //`for`文を使って`Array#map`を実装せよ
 function map() {}
 
-console.log(map([1, 2, 3], e => e * 2));
+console.log(map([1, 2, 3], (e) => e * 2));
 // [2, 4, 6]
 
-console.log(map(["a", "b", "c"], e => "(" + e + ")"));
+console.log(map(["a", "b", "c"], (e) => "(" + e + ")"));
 // ["(a)", "(b)", "(c)"]
 
 export function test() {
   const arr = [1, 2, 3];
 
-  console.log(arr.map(e => e * 2));
+  console.log(arr.map((e) => e * 2));
   console.log(arr.map((e, i) => e * i));
 
-  console.log(map(arr, e => e * 2));
+  console.log(map(arr, (e) => e * 2));
   console.log(map(arr, (e, i) => e * i));
 }

@@ -28,7 +28,7 @@ function test() {
   console.log(a4);
 
   const a5 = arr.slice();
-  const push2 = e => push(e);
+  const push2 = (e) => push(e);
   push2(4, 5, 6, 7, 8, 9);
   console.log(a5);
 }
