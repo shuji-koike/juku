@@ -34,3 +34,6 @@ git ls-files -v | grep '^s'
 
 - https://github.com/shuji-koike/juku/wiki/javascript
 - https://github.com/shuji-koike/juku/wiki/scala
+
+- https://www.scala-lang.org/files/archive/nightly/2.13.x/api/2.13.x/
+- https://www.ne.jp/asahi/hishidama/home/tech/scala/index.html
