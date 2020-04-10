@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "lint": "npx prettier --write ."
+    "lint": "npx prettier --write .",
+    "sbt:test": "sbt ~test"
   },
   "dependencies": {
     "react": "^16.13.1",
