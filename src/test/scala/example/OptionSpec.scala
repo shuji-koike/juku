@@ -37,7 +37,7 @@ class OptionSpec extends Spec {
     }
   }
 
-  "Option#map" should "be null safe" in {
+  "Option#map" should "be easy" in {
     Option(1).map(_ * 2) shouldEqual Some(2)
     Option.empty[Int].map(_ * 2) shouldEqual None
 
@@ -58,42 +58,59 @@ class OptionSpec extends Spec {
     Option.empty[String].fold(0)(_.length) shouldEqual 0
   }
 
-  {
-    for {
-      a <- Option("a")
-      b <- Option(2)
-    } yield {
-      a -> b
-    }
-  } shouldEqual Some("a" -> 2)
+  "Option" should "be composable" in {
+    {
+      for {
+        a <- Option("a")
+        b <- Option(2)
+      } yield {
+        a -> b
+      }
+    } shouldEqual Some("a" -> 2)
+
+    {
+      (Option("a"), Option(2)) match {
+        case (Some(a), Some(b)) => Some(a -> b)
+        case (Some(a), None)    => Some(a -> 0)
+        case _                  => None
+      }
+    } shouldEqual Some("a" -> 2)
+
+    {
+      Option("a").flatMap(a => Some(2).map(b => a -> b))
+    } shouldEqual Some("a" -> 2)
+  }
 
   {
-    (Option("a"), Option(2)) match {
-      case (Some(a), Some(b)) => Some(a -> b)
-      case (Some(a), None)    => Some(a -> 0)
-      case _                  => None
-    }
-  } shouldEqual Some("a" -> 2)
+    Option(1).isDefined shouldEqual true
+    Option(1).isEmpty shouldEqual false
+
+    None.isDefined shouldEqual false
+    None.isEmpty shouldEqual true
+  }
 
   {
-    Option("a").flatMap(a => Some(2).map(b => a -> b))
-  } shouldEqual Some("a" -> 2)
+    Option.empty[Int].contains(1) shouldEqual false
+    Option.empty[Int].exists(_ == 1) shouldEqual false
+    Option.empty[Int].forall(_ == 1) shouldEqual true
 
-  Option(1).contains(1) shouldEqual true
-  Option(1).exists(_ == 1) shouldEqual true
-  Option(1).forall(_ == 1) shouldEqual true
+    Option(1).contains(1) shouldEqual true
+    Option(1).exists(_ == 1) shouldEqual true
+    Option(1).forall(_ == 1) shouldEqual true
 
-  Option(1).contains(2) shouldEqual false
-  Option(1).exists(_ == 2) shouldEqual false
-  Option(1).forall(_ == 2) shouldEqual false
+    Option(1).contains(2) shouldEqual false
+    Option(1).exists(_ == 2) shouldEqual false
+    Option(1).forall(_ == 2) shouldEqual false
+  }
 
-  Option.empty[Int].contains(1) shouldEqual false
-  Option.empty[Int].exists(_ == 1) shouldEqual false
-  Option.empty[Int].forall(_ == 1) shouldEqual true
+  "Option" should "be conditional" in {
+    if (true) Some(1) else None shouldEqual Some(1)
+    if (false) Some(1) else None shouldEqual None
 
-  Option(1).isDefined shouldEqual true
-  Option(1).isEmpty shouldEqual false
+    Option.when(true)(1) shouldEqual Some(1)
+    Option.when(false)(1) shouldEqual None
 
-  None.isDefined shouldEqual false
-  None.isEmpty shouldEqual true
+    Option.unless(false)(1) shouldEqual Some(1)
+    Option.unless(true)(1) shouldEqual None
+  }
 }
