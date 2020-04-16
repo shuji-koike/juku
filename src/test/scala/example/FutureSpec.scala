@@ -7,29 +7,28 @@ import scala.util.Success
 
 class FutureAsyncSpec extends AsyncSpec {
   "Future" should "be easy" in {
-    val f1 = Future {
+    val f = Future {
       Thread.sleep(100)
       "done"
     }
-    f1.isCompleted shouldEqual false
-    f1.map(_ shouldEqual "done")
+    f.isCompleted shouldEqual false
+    f.map(_ shouldEqual "done")
   }
 }
 
 class FutureSpec extends Spec {
   import scala.concurrent.ExecutionContext.Implicits.global
+
   "Future" should "be easy" in {
-    val f1 = Future {
+    val f = Future {
       Thread.sleep(100)
       "done"
     }
-    f1.isCompleted shouldEqual false
 
-    f1.map(_ shouldEqual "!?!?")
+    f.isCompleted shouldEqual false
+    Await.ready(f, Duration.Inf)
+    f.isCompleted shouldEqual true
 
-    Await.ready(f1, Duration.Inf)
-    f1.isCompleted shouldEqual true
-
-    f1.value shouldEqual Some(Success("done"))
+    f.value shouldEqual Some(Success("done"))
   }
 }
